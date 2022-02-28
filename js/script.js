@@ -1,5 +1,4 @@
-<button onclick="alert('Clickie!')">
-  Click me!
-</button>
-let favoriteFood = 'Pizza';
+alert('Hello world');
+// I dont get it ;) 
 document.write(favoriteFood);
+var favoriteFood = "Pizza";
