@@ -1,6 +1,6 @@
 //list of pokemon
 let pokemonList = [{
-    name: 'Balbasaur',
+    name: 'Bulbasaur',
     height: 0.7,
     weight: 6.9,
     type: ['grass', 'poison']
@@ -27,7 +27,7 @@ let pokemonList = [{
     type: ['dragon']
   }
   ];
-  
+
   //loops through list
 
   for (let i = 0; i < pokemonList.length; i++) {
