@@ -1,53 +1,57 @@
-// IIFE
 let pokemonRepository = (function () {
-  let pokemonList = [{
-  name: 'Bulbasaur',
-  height: 0.7,
-  weight: 6.9,
-  type: ['grass', 'poison']
-},
+  let repository = [
+    {
+      name: "Bulbasaur",
+      height: 0.7,
+      types: ["grass", "poison"],
+    },
+    {
+      name: "Charizard",
+      height: 1.7,
+      types: ["fire", "flying"],
+    },
+    {
+      name: "Squirtle",
+      height: 1,
+      types: ["water"],
+    },
+  ];
 
-{
-  name: 'Charmilion',
-  height: 1.1,
-  weight: 19,
-  type: ['fire']
-},
-
-{
-  name: 'Dratini',
-  height: 1.8,
-  weight: 3.3,
-  type: ['dragpn']
-},
-
-{
-  name: 'Rayquaza',
-  height: 7,
-  weight: 206.5,
-  type: ['dragon']
-},
-];
-// Public functions
   function add(pokemon) {
-    pokemonList.push(pokemon);
+    if (
+      typeof pokemon === "object" &&
+      "name" in pokemon &&
+      "height" in pokemon &&
+      "types" in pokemon
+    ) {
+      repository.push(pokemon);
+    } else {
+      console.log("pokemon is not correct");
+    }
   }
-
   function getAll() {
-    return pokemonList;
+    return repository;
   }
-
+  function addListItem(pokemon){
+    let pokemonList = document.querySelector(".pokemon-list");
+    let listpokemon = document.createElement("li");
+    let button = document.createElement("button");
+    button.innerText = pokemon.name;
+    button.classList.add("button-class");
+    listpokemon.appendChild(button);
+    pokemonList.appendChild(listpokemon);
+  }
   return {
     add: add,
-    getAll: getAll
+    getAll: getAll,
+    addListItem: addListItem
   };
 })();
-// Updated forEach loop
-pokemonRepository.getAll().forEach(function(pokemon){
-  document.write(pokemon.name + " height: "+ pokemon.height + ", ");
-  document.write ("<br/>");
+
+pokemonRepository.add({ name: "Pikachu", height: 0.3, types: ["electric"] });
+
+console.log(pokemonRepository.getAll());
+
+pokemonRepository.getAll().forEach(function (pokemon) {
+  pokemonRepository.addListItem(pokemon);
 });
-// Add object
-console.log(pokemonRepository.getAll());
-pokemonRepository.add({ name: 'Raichu' });
-console.log(pokemonRepository.getAll());
