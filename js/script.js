@@ -1,6 +1,9 @@
+//wrapping the code in IIFE
+
 let pokemonRepository = (function () {
+let modalContainer = document.querySelector('#modal-container');
   let pokemonList = [];
-  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=50';
 
   function add(pokemon) {
     if (
@@ -59,10 +62,38 @@ let pokemonRepository = (function () {
     });
   }
 
-  function showDetails(item) {
-    pokemonRepository.loadDetails(item).then(function () {
-      console.log(item);
+  function showDetails(pokemon) {
+    loadDetails(pokemon).then(function () {
+      showModal(pokemon.name, pokemon.height, pokemon.types, pokemon.imageUrl);
+      console.log("pokemon selected: " + pokemon.name + "is" + pokemon.height + "and with the abilities of" + pokemon.types);
+
     });
+  }
+
+  function showModal(name, height, type, imageUrl){
+  let modalContainer = document.querySelector(".modal-container");
+    document.querySelector('.modal__title').innerText = name;
+    let description = 'Height: ' + height + '<br>type: ' + type;
+
+    document.querySelector('.modal__text').innerHTML = description;
+    document.querySelector('.modal__img').setAttribute('src', imageUrl);
+    console.log(imageUrl);
+
+    let closeButton = document.querySelector(".modal-close");
+    closeButton.addEventListener("click", hideModal);
+
+    window.addEventListener('keydown', (e) => {
+    console.log(e.key);
+    if (e.key === 'Escape' && modalContainer.classList.contains('is-visible'))
+    hideModal();
+    });
+
+    modalContainer.classList.add("is-visible");
+  }
+
+  function hideModal() {
+    let modalContainer = document.querySelector('.modal-container');
+    modalContainer.classList.remove('is-visible');
   }
 
   return {
@@ -71,12 +102,14 @@ let pokemonRepository = (function () {
     addListItem: addListItem,
     loadList: loadList,
     loadDetails: loadDetails,
-    showDetails: showDetails
+    showDetails: showDetails,
+    showModal: showModal,
+    hideModal: hideModal
+
   };
 })();
 
-
-pokemonRepository.loadList().then(function () {
+pokemonRepository.loadList().then(function(){
   pokemonRepository.getAll().forEach(function (pokemon) {
     pokemonRepository.addListItem(pokemon);
   });
