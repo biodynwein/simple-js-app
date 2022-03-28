@@ -3,7 +3,7 @@
 let pokemonRepository = (function () {
 let modalContainer = document.querySelector('#modal-container');
   let pokemonList = [];
-  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=50';
+  let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
   function add(pokemon) {
     if (
