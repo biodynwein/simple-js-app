@@ -52,8 +52,10 @@ let modalContainer = document.querySelector('#modal-container');
     let url = item.detailsUrl;
     return fetch(url).then(function (response) {
       return response.json();
-    }).then(function (details) {
-      // Now we add the details to the item
+    })
+
+    .then(function (details) {
+
       item.imageUrl = details.sprites.front_default;
       item.height = details.height;
       item.types = details.types;
@@ -70,30 +72,57 @@ let modalContainer = document.querySelector('#modal-container');
     });
   }
 
-  function showModal(name, height, type, imageUrl){
-  let modalContainer = document.querySelector(".modal-container");
-    document.querySelector('.modal__title').innerText = name;
-    let description = 'Height: ' + height + '<br>type: ' + type;
+  function showModal(details) {
+    var $modalContainer = document.querySelector("#modal-container");
+    $modalContainer.innerHTML = "";
 
-    document.querySelector('.modal__text').innerHTML = description;
-    document.querySelector('.modal__img').setAttribute('src', imageUrl);
-    console.log(imageUrl);
+    var modal = document.createElement("div");
+    modal.classList.add("modal");
 
-    let closeButton = document.querySelector(".modal-close");
+    var closeButton = document.createElement("button");
+    closeButton.classList.add("modal-close");
+    closeButton.innerText = "X";
     closeButton.addEventListener("click", hideModal);
 
-    window.addEventListener('keydown', (e) => {
-    console.log(e.key);
-    if (e.key === 'Escape' && modalContainer.classList.contains('is-visible'))
-    hideModal();
+    var titleContent = document.createElement("h1");
+    titleContent.innerText = details.name;
+
+    var content = document.createElement("p");
+    content.innerText = "Height: " + details.height;
+
+    var img = document.createElement("img");
+    img.src = details.imageUrl;
+    img.classList.add("pokemon-image");
+
+    modal.appendChild(closeButton);
+    modal.appendChild(titleContent);
+    modal.appendChild(img);
+    modal.appendChild(content);
+    $modalContainer.appendChild(modal);
+
+    $modalContainer.classList.add("is-visible");
+
+    window.addEventListener("keydown", e => {
+      var $modalContainer = document.querySelector("#modal-container");
+      if (
+        e.key === "Escape" &&
+        $modalContainer.classList.contains("is-visible")
+      ) {
+        hideModal();
+      }
     });
 
-    modalContainer.classList.add("is-visible");
+    $modalContainer.addEventListener("click", e => {
+      var target = e.target;
+      if (target === $modalContainer) {
+        hideModal();
+      }
+    });
   }
 
   function hideModal() {
-    let modalContainer = document.querySelector('.modal-container');
-    modalContainer.classList.remove('is-visible');
+    var $modalContainer = document.querySelector("#modal-container");
+    $modalContainer.classList.remove("is-visible");
   }
 
   return {
