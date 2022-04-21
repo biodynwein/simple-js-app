@@ -11,9 +11,28 @@
     <link href="css/styles.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <center><h1>Milos Pokemon App</h1>
-    <ul class="pokemon-list" style="list-style-type:none">
-    <div id='modal-container'></div></ul></center>
+    <center><div class="container">
+      <h1>Milos Pokemon App</h1>
+    </div>
+      <ul class="pokemon-list"></ul>
+    <div>
+    <div class="modal fade" id="pokedexModal" tabindex="-1" role="dialog" aria-labelledby="pokedexModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="pokedexModalLabel"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+          </div>
+           <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div></center>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
     integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
@@ -22,6 +41,6 @@
     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="js/promise-polyfill.js"></script>
     <script src="js/fetch-polyfill.js"></script>
-    <script src="js/dist"></script>
+    <script src="js/dist.js"></script>
   </body>
 </html>
