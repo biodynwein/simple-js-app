@@ -18,8 +18,8 @@ var pokemonRepository = (function() {
 
     button.innerText = pokemon.name;
     button.classList.add('btn', 'btn-secondary', 'btn-block');
-    button.setAttribute('data-target', '#pokedexModal')
-    button.setAttribute('data-toggle', 'modal');
+    button.setAttribute('data-bs-target', '#pokedexModal')
+    button.setAttribute('data-bs-toggle', 'modal');
 
 
     pokelist.appendChild(listItem);
